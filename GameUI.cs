@@ -37,7 +37,6 @@ public class GameUI : MonoBehaviour
     public void SetEndScreen(bool hasWon)
     {
         endScreen.SetActive(true);
-
         endScreenScoreText.text = "<b>Score</b>\n" + GameManager.instance.score;
 
         if (hasWon)
@@ -51,6 +50,28 @@ public class GameUI : MonoBehaviour
             endScreenHeader.color = Color.red;
         }
     }
-    
+    public void OnRestartButton()
+    {
+        GameManager.instance.ResetScore();        
+        SceneManager.LoadScene(1);
+
+        //GameManager.instance.TogglePauseGame();  Revisar estado Pausado
+        Time.timeScale = 1.0f;
+    }
+    public void OnMenuButton()
+    {
+        SceneManager.LoadScene(0);
+    }
+    // called when the game is paused or un-paused
+    public void TogglePauseScreen(bool paused)
+    {
+        pauseScreen.SetActive(paused);
+    }
+
+    // called when the "Resume" button is pressed
+    public void OnResumeButton()
+    {
+        GameManager.instance.TogglePauseGame();
+    }
 }
- 
+
